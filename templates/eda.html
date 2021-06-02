@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% block styles %}
+{{super()}}
+<link href="{{cdn_css | safe}}" rel="text/css">
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.3.1.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.1.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.1.min.js"
+        crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+
+{{script1 | safe}}
+{{div1 | safe}}
+
+{% endblock %}

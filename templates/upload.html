@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% block scripts %}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+{% endblock %}
+{% block content %}
+<div id='homecontent'>
+<h1>File Input</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="inputFile"> File input</label>
+        <input type="file" name="inputFile">
+    </div>
+        <button type="submit" class="btn btn-default" onclick="$('#loading').show(); $('#updatedmsg').hide(); $('#lastUpdatedMsg').hide()">Submit</button> 
+    </form>
+    <div style="display:none;" id="loading">
+        <img src="./static/img/uploading.gif" alt="Uploading!" style="width:50px;height:50px;" />
+    </div>
+    <br>
+    <div id="lastUpdatedMsg">
+        {{ lastUpdatedMsg }} 
+    </div>
+    <div id="updatedmsg">
+        {{ updateMsg }} 
+    </div>
+</div>
+{% endblock %}
+<script>
+
+</script>
