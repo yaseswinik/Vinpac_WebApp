@@ -34,7 +34,7 @@ docker build -t <repo>/<image>:<tag> .
 
 To run the Docker container, 
 
-docker run -p <new_port_number>:5000 -d <repo>/<image>:<tag>
+docker run -p <new_port_number_for_container>:<port_number_specified_in_line_246> -d <repo>/<image>:<tag>
 
 
 
