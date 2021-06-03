@@ -1,5 +1,5 @@
 {% extends "index.html" %}
-
+{% block title %}Visualisation{% endblock %}
 {% block styles %}
 {{super()}}
 <link href="{{cdn_css | safe}}" rel="text/css">
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-<div> <b>NOTE:</b> Top Left - High frequency, Less duration | Top Right - High frequency, More duration | Bottom Left - Low frequency, Less duration | Bottom Right - Low frequency more duration</div>
+<div> <b>NOTE:</b> Top Left - High frequency, Less duration | Top Right - High frequency, More duration | Bottom Left - Low frequency, Less duration | Bottom Right - Low frequency, More duration</div>
 {{script1 | safe}}
 {{div1 | safe}}
 

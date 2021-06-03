@@ -208,7 +208,6 @@ sockets, port = bind_sockets("127.0.0.1", 0) """
 
 @app.route('/mbaresults', methods=["GET"])
 def get_analysis():
-    #script = server_document(url='http://127.0.0.1:5006/dash_final')
     mba_obj = mba.mba_result_page(engine, logger)
     script1, div1 = components(mba_obj)
     return(render_template('mbaresults.html', script1=script1, div1=div1))
