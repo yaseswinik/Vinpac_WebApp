@@ -124,7 +124,7 @@ def preProcess():
     del s_df
     table_df.drop(index=idx, axis=0, inplace=True)
     del idx
-    table_df.to_sql('vinpacCleaned',con = engine, if_exists='replace', index=False)
+    table_df.to_sql('vinpaccleaned',con = engine, if_exists='replace', index=False)
     #loop.close()
     logger.info("Preprocessed data is now updated")
 

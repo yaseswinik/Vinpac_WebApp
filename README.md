@@ -30,11 +30,11 @@ In line 246: app.run(debug=True, host='0.0.0.0', port=<new_port_number>), change
 
 ### Creating the docker container
 
-docker build -t <repo>/<image>:<tag> .
+docker build -t <repo_>/<image_>:<tag_> .
 
 To run the Docker container, 
 
-docker run -p <new_port_number_for_container>:<port_number_specified_in_line_246> -d <repo>/<image>:<tag>
+docker run -p <new_port_number_for_container>:<port_number_specified_in_line_246> -d <repo_>/<image_>:<tag_>
 
 
 

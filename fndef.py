@@ -3,15 +3,15 @@ import pandas as pd
 
 def lastupdated(engine,logger):
     import datetime
-    df = pd.read_sql_table('vinpacCleaned', con=engine)
+    df = pd.read_sql_table('vinpaccleaned', con=engine)
     ndf = pd.DataFrame([[df['t_stamp'].min(), df['t_stamp'].max(), datetime.datetime.now()]], columns=['Start_Date', 'End_Date', 'Updated_Date'])
-    ndf.to_sql('UpdatedDetails',con = engine, if_exists='replace', index=False)
+    ndf.to_sql('updateddetails',con = engine, if_exists='replace', index=False)
     del df, ndf
 
 def GetLastUpdatedMsg(engine,logger):
     import datetime
     try:
-        df = pd.read_sql_table('UpdatedDetails', con=engine)
+        df = pd.read_sql_table('updateddetails', con=engine)
         msg = "File was last uploaded on "+ df['Updated_Date'].iloc[0].strftime('%Y-%m-%d %H:%M:%S') +". It consists of data from "+ df['Start_Date'].iloc[0].strftime('%Y-%m-%d %H:%M:%S')   + " to " + df['End_Date'].iloc[0].strftime('%Y-%m-%d %H:%M:%S')   + "."
     except:
         msg = "Please upload file to see the results!!"
@@ -19,7 +19,7 @@ def GetLastUpdatedMsg(engine,logger):
     return msg
 
 def changedstatus(engine, logger):
-    df = pd.read_sql_table('vinpacCleaned', con=engine)
+    df = pd.read_sql_table('vinpaccleaned', con=engine)
     df = df.sort_values(by='t_stamp') 
     dfMachines = pd.DataFrame()
     machines = df.columns
@@ -55,8 +55,8 @@ def changedstatus(engine, logger):
         machStopChange = machStopChange.append(prepData(dfm))
     #df1 = prepData(dfMachines)
 
-    dfMachines.to_sql('Machine_Status_Change',con = engine, if_exists='replace', index=False)
-    machStopChange.to_sql('MachineStoppageChange',con = engine, if_exists='replace', index=False)
+    dfMachines.to_sql('machine_status_change',con = engine, if_exists='replace', index=False)
+    machStopChange.to_sql('machinestoppagechange',con = engine, if_exists='replace', index=False)
 
     del dfMachines, df, machStopChange
 
@@ -86,9 +86,9 @@ def getInbetStopDet(filler_status_df, cleaned, filler_status):
 
 def machineDetailsFillerStop(engine, logger):
     logger.info("Calculation machine stoppages when filler stopped")
-    filler = pd.read_sql_table('Machine_Status_Change', con=engine)
+    filler = pd.read_sql_table('machine_status_change', con=engine)
     filler = filler.loc[filler.Machine == 'Filler']
-    cleaned = pd.read_sql_table('vinpacCleaned', con=engine)
+    cleaned = pd.read_sql_table('vinpaccleaned', con=engine)
     dfn = pd.DataFrame()
     #Filler Safety Stopped
     logger.info("filler safety stopped")
@@ -176,14 +176,14 @@ def machineDetailsFillerStop(engine, logger):
     linedf['Start_Time']=pd.PeriodIndex(linedf['Start_Time'], freq='D').to_timestamp()
     linedf['Start_Time'] = pd.to_datetime(linedf['Start_Time'])
 
-    dfn.to_sql('MachineDetailsFillerStoppage',con = engine, if_exists='replace', index=False)
-    grp_dfn.to_sql('MachDetFillerStoppageEachDay',con = engine, if_exists='replace', index=False)
+    dfn.to_sql('machinedetailsfillerstoppage',con = engine, if_exists='replace', index=False)
+    grp_dfn.to_sql('machdetfillerstoppageeachday',con = engine, if_exists='replace', index=False)
     linedf.to_sql('MachStoppageforFillerAllDays',con = engine, if_exists='replace', index=False)
 
     del dfn, grp_dfn, filler, cleaned, fstatus, linedf
 
 """ def mbaAllZeros(engine, logger):
-    df = pd.read_sql_table('vinpacCleaned', con=engine)
+    df = pd.read_sql_table('vinpaccleaned', con=engine)
     logger.info("Preparing All zeros data for MBA")
 
     stopped_state_yes = [1,2,3,4,5,6]
@@ -251,12 +251,12 @@ def machineDetailsFillerStop(engine, logger):
 def mbaFillerChange(engine, logger):
     logger.info("MBA filler change data is being prepared")
 
-    filler = pd.read_sql_table('Machine_Status_Change', con=engine)
+    filler = pd.read_sql_table('machine_status_change', con=engine)
 
     filler = filler.loc[filler.Machine == 'Filler']
     filler['Status'].replace('Safety Stopped','Safety_Stopped', inplace=True)
     filler['Status'].replace('User Stopped','User_Stopped', inplace=True)
-    cleaned = pd.read_sql_table('vinpacCleaned', con=engine)
+    cleaned = pd.read_sql_table('vinpaccleaned', con=engine)
     for column in cleaned.columns:
         if(column != 't_stamp'):
             statusMapValues = {0:'Running', 1:'Safety_Stopped', 2:'Starved', 3:'Blocked', 4:'Faulted', 5:'Unallocated', 6:'User_Stopped', 7:'Off', 8:'Setup' , 9:'Runout', 10:'Idle'}
@@ -309,7 +309,7 @@ def mbaFillerChange(engine, logger):
         return ndf
 
     data = transform_data(groupedData)
-    data.to_sql('MBA_Filler_Changed',con = engine, if_exists='replace', index=False)
+    data.to_sql('mba_filler_changed',con = engine, if_exists='replace', index=False)
     logger.info("Filler changa mba data is prepared")
 
 

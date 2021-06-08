@@ -15,7 +15,7 @@ from bokeh.layouts import column, gridplot, layout, grid
 def mba_results(engine, logger):
     
     logger.info("Entering analysis")
-    group_stoppage_21 = pd.read_sql_table('MBA_Filler_Changed', con=engine)
+    group_stoppage_21 = pd.read_sql_table('mba_filler_changed', con=engine)
 
     #grouped_stopped_states_21 = [1,2,3,4,5,6]
 
@@ -34,7 +34,7 @@ def mba_results(engine, logger):
     grouped_rules_21['antecedents'] = grouped_rules_21['antecedents'].apply(lambda a: ','.join(list(a)))
     grouped_rules_21['consequents'] = grouped_rules_21['consequents'].apply(lambda a: ','.join(list(a)))
 
-    grouped_rules_21.to_sql('MBA_All_Results',con = engine, if_exists='replace', index=False)
+    grouped_rules_21.to_sql('mba_all_results',con = engine, if_exists='replace', index=False)
 
 
     grouped_rules_21_4_5 = association_rules(grouped_frequent_itemsets_21, metric="confidence", min_threshold=0.10)
@@ -53,7 +53,7 @@ def mba_results(engine, logger):
     responsible_machine_for_filler = grouped_rules_21[grouped_rules_21['consequents'].astype(str).isin(machine_list)]
     responsible_machine_for_filler = responsible_machine_for_filler.sort_values(by=['confidence'], ascending=False)
 
-    responsible_machine_for_filler.to_sql('MBA_Filler_All_Results',con = engine, if_exists='replace', index=False)
+    responsible_machine_for_filler.to_sql('mba_filler_all_results',con = engine, if_exists='replace', index=False)
 
     ###################### BACKTRACKING ##############
 
@@ -79,7 +79,7 @@ def mba_results(engine, logger):
     responsible_machine_for_state_4_5 = responsible_machine_for_state_4_5.drop(['antecedent support','consequent support','support','lift','leverage','conviction'],axis=1)
     responsible_machine_for_state_4_5 = responsible_machine_for_state_4_5[['Main_responsible','confidence_main_responsible','Target_machine']]
 
-    responsible_machine_for_state_4_5.to_sql('State4_State5_Results',con = engine, if_exists='replace', index=False)
+    responsible_machine_for_state_4_5.to_sql('state4_state5_results',con = engine, if_exists='replace', index=False)
 
     ##################### DISPLAYING FINAL RESULTS ##############
     
@@ -94,13 +94,13 @@ def mba_results(engine, logger):
 
     final_mba_results[['confidence_main_responsible','confidence_secondary_responsible']] = final_mba_results[['confidence_main_responsible','confidence_secondary_responsible']]*100
     final_mba_results = final_mba_results[['Main_responsible','confidence_main_responsible','secondary_responsible','confidence_secondary_responsible','Target_Filler']]
-    final_mba_results.to_sql('MBA_Final_Results',con = engine, if_exists='replace', index=False)
+    final_mba_results.to_sql('mba_final_results',con = engine, if_exists='replace', index=False)
 
     logger.info("Analysis completed")
 
 def mba_result_page(engine, logger):
-    mba_results = pd.read_sql_table('MBA_Final_Results',con = engine)
-    state_4_5 = pd.read_sql_table('State4_State5_Results',con = engine)
+    mba_results = pd.read_sql_table('mba_final_results',con = engine)
+    state_4_5 = pd.read_sql_table('state4_state5_results',con = engine)
 
     columns_results = [TableColumn(field="Main_responsible", title="Primary Responsible Machine"),TableColumn(field="confidence_main_responsible", title="Confidence-Primary", formatter=NumberFormatter(format="0.000")), TableColumn(field="secondary_responsible", title="Secondary Responsible Machine"), TableColumn(field="confidence_secondary_responsible", title="Confidence-Secondary",formatter=NumberFormatter(format="0.000")), TableColumn(field="Target_Filler", title="Filler Status")] 
     data_table_res = DataTable(source=ColumnDataSource(mba_results), columns=columns_results, width=400, height=300, autosize_mode = 'fit_viewport')

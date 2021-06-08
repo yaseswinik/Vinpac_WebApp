@@ -9,18 +9,18 @@
 <h4>Tables Persisted</h4>
 <ul>
 <li><b>vinpac1:</b> Stores the raw data that is uploaded via CSV. </li>
-<li><b>vinpacCleaned:</b> Stores the cleaned data.</li>
-<li><b>Machine_Status_Change:</b> Stores the status change along with the duration it has been in that status for each machine.</li>
-<li><b>MachineStoppageChange:</b> Groups and sums the data from Machine_Status_Change based on the machine and its status. (used in visualisation) </li>
-<li><b>MachineDetailsFillerStoppage:</b> Stores the stoppage details – the number of status changed and the duration of that state for all machines in each Filler stopped states. </li>
-<li><b>MachDetFillerStoppageEachDay:</b> Groups the data from MachineDetailsFillerStoppage based on the date for all machines in each Filler stopped states.</li>
-<li><b>MachStoppageforFillerAllDays:</b> Stores the data from MachDetFillerStoppageEachDay in a time-series type after imputing values for the missing days as 0.(used in dashboard) </li>
-<li><b>MBA_Filler_Changed:</b> Stores the data prepared for association analysis.</li>
-<li><b>MBA_All_Results:</b> Stores all the rules obtained after performing association analysis using apriori with a confidence of 50%. </li>
-<li><b>MBA_Filler_All_Results:</b> Stores all the rules for Filler machine’s stopped states which is filtered from the rules in the MBA_All_Results. </li>
-<li><b>State4_State5_Results:</b> Stores the rules for all machines’ Faulted and Unallocated stoppage states. </li>
-<li><b>MBA_Final_Results:</b> Stores the final association results after performing backtracking to find the main responsible machine causing the Filler to stop. </li>
-<li><b>UpdatedDetails:</b> Stores the file upload date along with the date range in the file.</li>
+<li><b>vinpaccleaned:</b> Stores the cleaned data.</li>
+<li><b>machine_status_change:</b> Stores the status change along with the duration it has been in that status for each machine.</li>
+<li><b>machinestoppagechange:</b> Groups and sums the data from machine_status_change based on the machine and its status. (used in visualisation) </li>
+<li><b>machinedetailsfillerstoppage:</b> Stores the stoppage details – the number of status changed and the duration of that state for all machines in each Filler stopped states. </li>
+<li><b>machdetfillerstoppageeachday:</b> Groups the data from machinedetailsfillerstoppage based on the date for all machines in each Filler stopped states.</li>
+<li><b>machstoppageforfilleralldays:</b> Stores the data from machdetfillerstoppageeachday in a time-series type after imputing values for the missing days as 0.(used in dashboard) </li>
+<li><b>mba_filler_changed:</b> Stores the data prepared for association analysis.</li>
+<li><b>mba_all_results:</b> Stores all the rules obtained after performing association analysis using apriori with a confidence of 50%. </li>
+<li><b>mba_filler_all_results:</b> Stores all the rules for Filler machine’s stopped states which is filtered from the rules in the mba_all_results. </li>
+<li><b>state4_state5_results:</b> Stores the rules for all machines’ Faulted and Unallocated stoppage states. </li>
+<li><b>mba_final_results:</b> Stores the final association results after performing backtracking to find the main responsible machine causing the Filler to stop. </li>
+<li><b>updateddetails:</b> Stores the file upload date along with the date range in the file.</li>
 </ul>
 <hr>
 <h4>Resources</h4>

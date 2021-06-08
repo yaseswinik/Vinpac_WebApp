@@ -65,7 +65,7 @@ def plot_graph_scatter(df_ss):
 def plot_scatter(engine, logger):
     logger.info("plotting scatterplot bokeh")
     plot_list = []
-    machines_df = pd.read_sql_table('MachineStoppageChange', con=engine)
+    machines_df = pd.read_sql_table('machinestoppagechange', con=engine)
     txt = ""
     missing_machine = []
     machine_names = machines_df.Machine.unique()
@@ -141,7 +141,7 @@ def plot_tabs(engine, logger):
     logger.info('Plotting tabs')
     m_status = ['Blocked', 'Faulted', 'Safety Stopped', 'Starved', 'Unallocated', 'User Stopped']
     tabs_list = []
-    dfn = pd.read_sql_table('MachineDetailsFillerStoppage', con=engine)
+    dfn = pd.read_sql_table('machinedetailsfillerstoppage', con=engine)
     m = dfn.groupby(['Filler_Status','Machine','Status']).sum().reset_index()
     m['duration_sec'] = round(m['duration_sec'],3)
     for mstatus in m_status:
