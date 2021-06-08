@@ -46,9 +46,9 @@ nav = Nav()
 nav.register_element('top', topbar)
 
 # database connection
-engine = sqlalchemy.create_engine('postgresql+psycopg2://admin:admin@localhost:5432/capstone')
+#engine = sqlalchemy.create_engine('postgresql+psycopg2://admin:admin@localhost:5432/capstone')
 #engine = sqlalchemy.create_engine('sqlite:///capstone.db')
-#engine = sqlalchemy.create_engine('mysql+pymysql://root:Kukku123MYSQL@localhost/vinpac')
+engine = sqlalchemy.create_engine('mysql+pymysql://root:Kukku123MYSQL@host.docker.internal/vinpac')
 ################Logger##########
 logger = logging.getLogger('werkzeug') # grabs underlying WSGI logger
 handler = logging.FileHandler('vinpac.log') # creates handler for the log file
