@@ -1,14 +1,14 @@
 # Vinpac_WebApp
 
-##Initial Running
+## Initial Running
 
-###Tool
+### Tool
 Use the below command line
 docker pull yases95/capstone:mysql
 
 Then use the following command to run the container: docker run -p 5000:5000 -d yases95/capstone:mysql
 
-##Dashboard
+## Dashboard
 Check https://github.com/yaseswinik/Vinpac_Dashboard for running dashboard
 
 
