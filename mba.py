@@ -10,6 +10,7 @@ from mlxtend.frequent_patterns import association_rules
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource, HoverTool, DataTable, TableColumn, Div, NumberFormatter
 from bokeh.layouts import column, gridplot, layout, grid
+import numpy as np
 
 
 def mba_results(engine, logger):
@@ -33,6 +34,8 @@ def mba_results(engine, logger):
     grouped_rules_21.head()
     grouped_rules_21['antecedents'] = grouped_rules_21['antecedents'].apply(lambda a: ','.join(list(a)))
     grouped_rules_21['consequents'] = grouped_rules_21['consequents'].apply(lambda a: ','.join(list(a)))
+
+    grouped_rules_21 = grouped_rules_21.replace([np.inf, -np.inf], np.nan)
 
     grouped_rules_21.to_sql('mba_all_results',con = engine, if_exists='replace', index=False)
 

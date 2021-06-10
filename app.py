@@ -46,7 +46,7 @@ nav = Nav()
 nav.register_element('top', topbar)
 
 # database connection
-#engine = sqlalchemy.create_engine('postgresql+psycopg2://admin:admin@localhost:5432/capstone')
+#engine = sqlalchemy.create_engine('postgresql+psycopg2://admin:admin@host.docker.internal:5432/capstone')
 #engine = sqlalchemy.create_engine('sqlite:///capstone.db')
 engine = sqlalchemy.create_engine('mysql+pymysql://root:Kukku123MYSQL@host.docker.internal/vinpac')
 ################Logger##########

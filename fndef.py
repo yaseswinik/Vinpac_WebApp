@@ -178,7 +178,7 @@ def machineDetailsFillerStop(engine, logger):
 
     dfn.to_sql('machinedetailsfillerstoppage',con = engine, if_exists='replace', index=False)
     grp_dfn.to_sql('machdetfillerstoppageeachday',con = engine, if_exists='replace', index=False)
-    linedf.to_sql('MachStoppageforFillerAllDays',con = engine, if_exists='replace', index=False)
+    linedf.to_sql('machstoppageforfilleralldays',con = engine, if_exists='replace', index=False)
 
     del dfn, grp_dfn, filler, cleaned, fstatus, linedf
 
