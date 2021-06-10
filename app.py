@@ -170,7 +170,7 @@ def get_visualisation():
 @app.route('/dashboard', methods=["GET"])
 def get_dashboard():
     logger.info("Visualisation 2")
-    script = server_document(url='http://127.0.0.1:5006/dash_final')
+    script = server_document(url='http://127.0.0.1:5006/dashboard')
     return(render_template('dashboard.html', script=script, template="Flask"))
 
 ###############################################
