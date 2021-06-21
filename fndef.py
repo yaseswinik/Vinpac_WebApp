@@ -288,6 +288,7 @@ def mbaFillerChange(engine, logger):
                     else:
                         st = st+"_"+temp_df.columns[col]+"_"+str(temp_df.iat[row , col])
             if st!='' :
+                st = st[:64] if (len(st) > 64) else st
                 listmachines.append(st)
         cntr+=1
         item_no.append("Stop_"+str(cntr))
